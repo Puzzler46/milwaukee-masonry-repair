@@ -80,6 +80,17 @@ def run() -> int:
         print('ERROR: No original project images discovered. No substitute photos used.',file=sys.stderr)
         return 1
     OUT.mkdir(parents=True,exist_ok=True)
+    # Preserve manually reviewed captions and service categories on future imports.
+    existing_manifest=OUT/'manifest.json'
+    previous={}
+    existing_caption=None
+    if existing_manifest.exists():
+        try:
+            current=json.loads(existing_manifest.read_text())
+            existing_caption=current.get('caption')
+            previous={item['source']:item for item in current.get('photos',[]) if 'source' in item}
+        except (json.JSONDecodeError, OSError, KeyError) as exc:
+            print('WARNING: existing manifest could not be reused:',exc,file=sys.stderr)
     photos=[]
     for pos,url in enumerate(candidates,1):
         try:
@@ -88,8 +99,11 @@ def run() -> int:
             image.thumbnail((1800,1800),Image.Resampling.LANCZOS)
             filename=f'project-{pos:02d}.webp'
             image.save(OUT / filename,'WEBP',quality=86,method=6)
-            photos.append({'id':f'project-{pos:02d}','title':f'Original project photo {pos:02d}',
-                           'image':f'assets/projects/{filename}', 'category':'uncategorized',
+            prior=previous.get(url,{})
+            photos.append({'id':f'project-{pos:02d}',
+                           'title':prior.get('title',f'Original project photo {pos:02d}'),
+                           'image':f'assets/projects/{filename}',
+                           'category':prior.get('category','uncategorized'),
                            'source':url, 'width':image.width,'height':image.height})
             print('OK ',filename,image.size,'bytes=',(OUT/filename).stat().st_size)
         except Exception as exc:
@@ -99,7 +113,7 @@ def run() -> int:
         return 2
     # Do not change the live website until each of the source images is available locally.
     manifest = {'source_site':ORIGIN,'imported_at_utc':dt.datetime.now(dt.timezone.utc).isoformat(),
-                'caption':'Original project photos; per-service classifications pending visual review',
+                'caption':existing_caption or 'Original project photos; service categories require visual review',
                 'photos':photos}
     (OUT/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print('IMPORTED',len(photos),'of',len(candidates),'from source site')
