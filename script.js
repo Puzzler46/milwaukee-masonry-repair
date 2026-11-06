@@ -1,16 +1,20 @@
 'use strict';
 
-// The prior gallery linked to nine Google Sites images whose hotlink URLs cannot
-// be relied upon from GitHub Pages. Do not treat arbitrary photo order as proof
-// of a project's service category. These are six correctly labeled slots.
-// When actual photos are supplied, set image to their local repository path.
+// Project photographs captured from Milwaukee Masonry Repair's original Google Sites
+// homepage and committed to this repository. Visual categories describe the image
+// subject; they do not claim that each pictured element received a given repair.
+// Update project caption/category only after reviewing the original photo.
 const galleryItems = [
-  {category:'brick', title:'Brick & block repair', image:null},
-  {category:'tuckpointing', title:'Tuckpointing', image:null},
-  {category:'chimney', title:'Chimney work', image:null},
-  {category:'stone', title:'Stone, sills & lintels', image:null},
-  {category:'pavers', title:'Pavers & hardscaping', image:null},
-  {category:'cleaning', title:'Cleaning & sealing', image:null}
+  {category:'chimney', title:'Brick chimney and concrete cap', image:'assets/projects/project-01.webp'},
+  {category:'tuckpointing', title:'Brick wall and mortar joints', image:'assets/projects/project-02.webp'},
+  {category:'stone', title:'Masonry support and stone cap detail', image:'assets/projects/project-03.webp'},
+  {category:'brick', title:'Brick masonry wall', image:'assets/projects/project-04.webp'},
+  {category:'pavers', title:'Brick paver entry and steps', image:'assets/projects/project-05.webp'},
+  {category:'pavers', title:'Concrete walkway and edging', image:'assets/projects/project-06.webp'},
+  {category:'brick', title:'Brick foundation wall', image:'assets/projects/project-07.webp'},
+  {category:'stone', title:'Stone veneer wall', image:'assets/projects/project-08.webp'},
+  {category:'tuckpointing', title:'Brickwork and mortar joint detail', image:'assets/projects/project-09.webp'},
+  {category:'chimney', title:'Brick chimney with roof flashing', image:'assets/projects/project-10.webp'}
 ];
 const originalGalleryURL = 'https://www.milwaukeemasonryrepair.com/';
 const $ = selector => document.querySelector(selector);
@@ -30,20 +34,26 @@ function makeElement(tag, className, value){
 }
 function drawGallery(){
   const selected=galleryFilter.value;
-  activeGallery=selected==='all'?galleryItems:galleryItems.filter(item=>item.category===selected);
+  const matches=galleryItems.filter(item=>item.category===selected);
+  const unclassified=selected!=='all' && matches.length===0;
+  activeGallery=(selected==='all' || unclassified)?galleryItems:matches;
   galleryTrack.replaceChildren();
+  const notice=$('#gallery-notice');
+  notice.hidden=!unclassified;
+  if(unclassified)notice.textContent='No cleaning or sealing-specific photos were found on the original website. Showing all original project photos instead.';
   activeGallery.forEach((item, i)=>{
     const card=document.createElement('a');
     card.className='gallery-card';
     card.href=originalGalleryURL;
     card.target='_blank';
     card.rel='noopener noreferrer';
-    card.setAttribute('aria-label',`View original gallery for ${item.title} (photos not yet uploaded)`);
+    card.setAttribute('aria-label',`View ${item.title} project photograph`);
     const fallback=makeElement('div','gallery-fallback');
+    const fallbackMessage=makeElement('small','','LOADING PHOTO…');
     fallback.append(
       makeElement('strong','',String(galleryItems.indexOf(item)+1).padStart(2,'0')),
       makeElement('span','',item.title),
-      makeElement('small','','PHOTO FILES PENDING — VIEW ORIGINAL GALLERY ↗')
+      fallbackMessage
     );
     card.append(fallback);
     if(item.image){
@@ -51,7 +61,7 @@ function drawGallery(){
       img.alt=`${item.title} project photograph`;
       img.loading='lazy'; img.decoding='async';
       img.addEventListener('load',()=>{fallback.hidden=true;card.removeAttribute('href');card.removeAttribute('target');card.setAttribute('role','button');card.setAttribute('tabindex','0');card.setAttribute('aria-label',`Open ${item.title} project photograph`);});
-      img.addEventListener('error',()=>{img.remove();fallback.hidden=false;});
+      img.addEventListener('error',()=>{img.remove();fallback.hidden=false;fallbackMessage.textContent='PHOTO UNAVAILABLE — VIEW ORIGINAL WEBSITE ↗';});
       img.src=item.image;
       card.prepend(img);
       card.addEventListener('click',e=>{if(img.complete&&img.naturalWidth){e.preventDefault();openLightbox(i);}});
@@ -59,13 +69,15 @@ function drawGallery(){
     }
     const info=makeElement('div','gallery-card-info');
     const copy=document.createElement('div');
-    copy.append(makeElement('small','',`SERVICE CATEGORY / ${String(galleryItems.indexOf(item)+1).padStart(2,'0')}`),makeElement('strong','',item.title));
+    copy.append(makeElement('small','',`ORIGINAL PROJECT PHOTO / ${String(galleryItems.indexOf(item)+1).padStart(2,'0')}`),makeElement('strong','',item.title));
     info.append(copy,makeElement('b','', '↗'));
     card.append(info);
     galleryTrack.append(card);
   });
   galleryTrack.scrollLeft=0;
-  galleryCount.textContent=selected==='all'?'06 CATEGORIES':`01 CATEGORY / ${activeGallery[0]?.title.toUpperCase()||''}`;
+  galleryCount.textContent=unclassified
+    ? `${String(activeGallery.length).padStart(2,'0')} PHOTOS — GENERAL GALLERY`
+    : `${String(activeGallery.length).padStart(2,'0')} PROJECT PHOTOS`;
 }
 galleryFilter.addEventListener('change',drawGallery);
 $('#gallery-prev').addEventListener('click',()=>galleryTrack.scrollBy({left:-galleryTrack.clientWidth*.75,behavior:'smooth'}));
