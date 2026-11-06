@@ -1,74 +1,105 @@
 'use strict';
 
-// Original project images published by Milwaukee Masonry Repair on its existing Google Site.
-// Photo categories are a preliminary editorial grouping; review against the photos before publishing.
-// For a reliable production gallery, copy approved originals into /assets/projects and replace URLs.
-const ORIGINAL_PROJECT_PHOTOS = [
-  'https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72vPiLRMyJ2aeCFMk5A9Hh-W5skeWOcoyz3MsqWUFsNt11sk6I0oXt7jkhvTvJHca7-abq3uvY5mOy4Zlh2IvtVgjy2_gPdg5uRX3OYhrpRTCyr6vzHVjMDYM7hMOhcQH20-hE0aPVbCqEd9tqGxQLYTlh1jib9q61KU6Ko2zuDD0EzbHIPj754lABYHIVHwrQu3X1dMpFL63RXQwru99pgLkghfuQE4L0Edocf7hJk=w1280',
-  'https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72tiYlqtTvOF94b7iOeJnmsfi2QNC6DphJi1Ar7Bw-BLkpmVdhXUVhFaG6_kB4MvFeRV61TjQLGg1j76r5N7nyPXc61H2gFm_gMUDLKT6-VQPyOio-aL3muPAwjtvO43zg4CLy-fer7KcBHh-8DIrGmSy58p9dcYeGT0tWdbIIrU0O-hDOJcyUASexDzaRiAsI03rLamfBymfVl9TKVOZl81Uo67P49r8Iq-VIYyHK4=w1280',
-  'https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72s6BjLkD4QnEiW4Y6SicLTGlUXN1u6y0yaPWy9wzqJHQrAXVVgwyor9CO450oxkldKTSvZ13XBrQ1JZOxFkah81UaZ855LVBhro2IPB6lzAwLhriB4ayD4V3_vm3SNlwwjCfV5-TTFjVLgdS7CZhXQHv5qxREU_gg-4svym9Yz-j9jVXwK1mlvkolIn9p-D868eGlwgoZiq-1Gf_3SmBwCJ7rUiOvp2j962hLTP=w1280',
-  'https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72uObIJKxjxfcyD8FJTOQO3CFWHaucy3paP_WNv3MizegU72wIwnzM6FhaFNmsiYU46a8OLUKTwRU1Lg5xVsS1UsMTK31u68KgjToRu9RR9rx8WWGVLrT4uv84kq3EgUnG11A8n0PR5IHc0fSoHVqOyN6ezEYBAgmzE7j1Jq6rWkA0bNW88YZBFdPGr5KnoUcYH46PYHsxH9PCa_2mrs8-ViUSWzrU1E6C_pXlDi4KI=w1280',
-  'https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72sUHsM3SM-8n4wTaVsvo2lcrKphbqr6n46HVTorsSMHTS83e3AE7_9s8UXnA5mha5INUQP5LpZkKvbIVL4LQy8FAfSV3aIEfmdQLSiQlQRN5vDtImEEYnuo4BGVjITACQGYlB65oRg29g726ibn7qediT6_6Wx_yQ6gDst4FqGbRpWLoUpTB6hhY9cJex-gm0NYL-11PZdEIKaeYAsl2-RAuJDJutp2hVkNbWhl=w1280',
-  'https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72uj5t6ITjpdSEmLng4wkVv-LQF1JktyOb1jw5KrnWC6SUjdQWwxPNzGjm-41pxZRq7Yv8GHLntGTmRGi8i6pDYAI5QG4Qd5j06DxR8hoMT5TDlKmUV7icEaBcP1DglHCjwaWoPDvLbAepdhHXDT6SFnIuCClU9EU7KPWeXaSAUt-ENyz5RvI4K_J-pxoGXskszq9Mu7N43DaaqXMbcWbrd2DwjwgXqCCp0KzR1bYxY=w1280',
-  'https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72uBXPiY6yyzJVfcp2B4mIwTysQ-8qRsF61e4qY_rsG1ledPd5tPFoT52qzXD3EVJNLKwJ27ODHHtmvEkI-VK9eH3ops7dMJU4fCLN5N7pycURgGOpb0eFV_LFRvtBHDl7M3pwQjsc-jW0GZPLoeLNlHd2xstLokW8qLwqZZw_gIQmVgryUXNd46sRepBOk=w1280',
-  'https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72vn6jDozjkHybNuoD3xKMhc1XIig-1U6pPHUQBLw3V_3fFwiq-ZLBl1R81dC5p4_gacIMzdOOnOaseutAh3DWWxFsjmLA0dOOcBTi8127931kwnrAmXNzzZf4HvUexTw-K6ouOktdtzdzhoKTOcQiHwTcritCHHJF4G9yjZPApkAKLSvJUS3yFTsOD0GP7ydj9jVR68NkL1ak5UU5feeP0zqbdQlpWuwAsJsgKH1UM=w1280',
-  'https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72u1T_mrbOAobrv60RptGjThmaw9Gv9Q5Aj6IpGPru4047RSlxq2Ir6d-Q2EXzoAkC5ad52nubDJPtwhc3FEiW4LR3hJ1oMTvZPRWr7U3kj7cl_Vq6thPBOkPw3YqspXAHEyDsa6xu5QcBMStt8o4-H99NW7c9Whx5PxhkpOo-qq6EGv-WBwOczW8UT7fVTPS0flWUTtmmKQE_cnN9V4GlgbcRVg52_Mx7eS-4cEKG4=w1280'
+// The prior gallery linked to nine Google Sites images whose hotlink URLs cannot
+// be relied upon from GitHub Pages. Do not treat arbitrary photo order as proof
+// of a project's service category. These are six correctly labeled slots.
+// When actual photos are supplied, set image to their local repository path.
+const galleryItems = [
+  {category:'brick', title:'Brick & block repair', image:null},
+  {category:'tuckpointing', title:'Tuckpointing', image:null},
+  {category:'chimney', title:'Chimney work', image:null},
+  {category:'stone', title:'Stone, sills & lintels', image:null},
+  {category:'pavers', title:'Pavers & hardscaping', image:null},
+  {category:'cleaning', title:'Cleaning & sealing', image:null}
 ];
-const categoryNames = {brick:'Brick & block',chimney:'Chimney & restoration',stone:'Stone & pavers'};
-const photos = ORIGINAL_PROJECT_PHOTOS.map((url, i) => ({url, index:i+1, category:['brick','brick','brick','chimney','chimney','chimney','stone','stone','stone'][i]}));
+const originalGalleryURL = 'https://www.milwaukeemasonryrepair.com/';
 const $ = selector => document.querySelector(selector);
 const galleryTrack = $('#gallery-track');
 const galleryFilter = $('#gallery-category');
 const galleryCount = $('#gallery-count');
-let activeGallery = photos;
+let activeGallery = galleryItems;
 let lightboxIndex = -1;
 let lastLightboxFocus = null;
+const lightbox = $('#lightbox');
 
-function drawGallery() {
-  const group=galleryFilter.value;
-  activeGallery = group==='all' ? photos : photos.filter(p=>p.category===group);
+function makeElement(tag, className, value){
+  const el=document.createElement(tag);
+  if(className)el.className=className;
+  if(value!=null)el.textContent=value;
+  return el;
+}
+function drawGallery(){
+  const selected=galleryFilter.value;
+  activeGallery=selected==='all'?galleryItems:galleryItems.filter(item=>item.category===selected);
   galleryTrack.replaceChildren();
-  activeGallery.forEach((photo, i)=>{
-    const card=document.createElement('button');
-    card.className='gallery-card'; card.type='button';
-    card.setAttribute('aria-label',`Open project photo ${photo.index}`);
-    const fallback=document.createElement('div');fallback.className='gallery-fallback';
-    const big=document.createElement('strong');big.textContent='MMR';
-    const small=document.createElement('span');small.textContent='Original project photo unavailable';
-    fallback.append(big,small);
-    const img=document.createElement('img');img.alt=`Milwaukee Masonry Repair project photograph ${photo.index}`;img.loading='lazy';img.decoding='async';
-    img.addEventListener('load',()=>{fallback.hidden=true;});
-    img.addEventListener('error',()=>{img.hidden=true;fallback.hidden=false;});
-    img.src=photo.url;
-    const info=document.createElement('div');info.className='gallery-card-info';
+  activeGallery.forEach((item, i)=>{
+    const card=document.createElement('a');
+    card.className='gallery-card';
+    card.href=originalGalleryURL;
+    card.target='_blank';
+    card.rel='noopener noreferrer';
+    card.setAttribute('aria-label',`View original gallery for ${item.title} (photos not yet uploaded)`);
+    const fallback=makeElement('div','gallery-fallback');
+    fallback.append(
+      makeElement('strong','',String(galleryItems.indexOf(item)+1).padStart(2,'0')),
+      makeElement('span','',item.title),
+      makeElement('small','','PHOTO FILES PENDING — VIEW ORIGINAL GALLERY ↗')
+    );
+    card.append(fallback);
+    if(item.image){
+      const img=document.createElement('img');
+      img.alt=`${item.title} project photograph`;
+      img.loading='lazy'; img.decoding='async';
+      img.addEventListener('load',()=>{fallback.hidden=true;card.removeAttribute('href');card.removeAttribute('target');card.setAttribute('role','button');card.setAttribute('tabindex','0');card.setAttribute('aria-label',`Open ${item.title} project photograph`);});
+      img.addEventListener('error',()=>{img.remove();fallback.hidden=false;});
+      img.src=item.image;
+      card.prepend(img);
+      card.addEventListener('click',e=>{if(img.complete&&img.naturalWidth){e.preventDefault();openLightbox(i);}});
+      card.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&img.complete&&img.naturalWidth){e.preventDefault();openLightbox(i);}});
+    }
+    const info=makeElement('div','gallery-card-info');
     const copy=document.createElement('div');
-    const tag=document.createElement('small');tag.textContent=`PROJECT PHOTO / ${String(photo.index).padStart(2,'0')}`;
-    const title=document.createElement('strong');title.textContent='Project gallery';
-    const plus=document.createElement('b');plus.textContent='+';
-    copy.append(tag,title);info.append(copy,plus);
-    card.append(fallback,img,info);
-    card.addEventListener('click',()=>openLightbox(i));
+    copy.append(makeElement('small','',`SERVICE CATEGORY / ${String(galleryItems.indexOf(item)+1).padStart(2,'0')}`),makeElement('strong','',item.title));
+    info.append(copy,makeElement('b','', '↗'));
+    card.append(info);
     galleryTrack.append(card);
   });
   galleryTrack.scrollLeft=0;
-  galleryCount.textContent=`${String(activeGallery.length).padStart(2,'0')} PHOTOS`;
+  galleryCount.textContent=selected==='all'?'06 CATEGORIES':`01 CATEGORY / ${activeGallery[0]?.title.toUpperCase()||''}`;
 }
 galleryFilter.addEventListener('change',drawGallery);
 $('#gallery-prev').addEventListener('click',()=>galleryTrack.scrollBy({left:-galleryTrack.clientWidth*.75,behavior:'smooth'}));
 $('#gallery-next').addEventListener('click',()=>galleryTrack.scrollBy({left:galleryTrack.clientWidth*.75,behavior:'smooth'}));
-const lightbox=$('#lightbox');
-function openLightbox(index) {
+// An anchor jump stays functional without JavaScript; with JavaScript it also
+// applies the service-specific filter before scrolling to the gallery.
+document.querySelectorAll('.service-card[data-gallery-category]').forEach(card=>{
+  card.addEventListener('click',()=>{
+    galleryFilter.value=card.dataset.galleryCategory;
+    drawGallery();
+  });
+});
+function openLightbox(index){
+  const item=activeGallery[index];
+  if(!item?.image)return;
   lightboxIndex=index;lastLightboxFocus=document.activeElement;
   updateLightbox();lightbox.hidden=false;document.body.style.overflow='hidden';$('#lightbox-close').focus();
 }
-function updateLightbox() {
-  const p=activeGallery[lightboxIndex];if(!p)return;
-  $('#lightbox-image').src=p.url;
-  $('#lightbox-image').alt=`Milwaukee Masonry Repair project photo ${p.index}`;
-  $('#lightbox-caption').textContent=`PROJECT PHOTO ${String(p.index).padStart(2,'0')} / ${String(activeGallery.length).padStart(2,'0')}`;
+function updateLightbox(){
+  const item=activeGallery[lightboxIndex];if(!item?.image)return;
+  $('#lightbox-image').src=item.image;
+  $('#lightbox-image').alt=`${item.title} project photo`;
+  $('#lightbox-caption').textContent=item.title;
 }
-function closeLightbox(){lightbox.hidden=true;document.body.style.overflow='';if(lastLightboxFocus)lastLightboxFocus.focus();}
-function stepLightbox(dir){lightboxIndex=(lightboxIndex+dir+activeGallery.length)%activeGallery.length;updateLightbox();}
+function closeLightbox(){
+  lightbox.hidden=true;document.body.style.overflow='';if(lastLightboxFocus)lastLightboxFocus.focus();
+}
+function stepLightbox(dir){
+  const available=activeGallery.map((item,i)=>item.image?i:-1).filter(i=>i>=0);
+  if(!available.length)return;
+  const position=Math.max(0,available.indexOf(lightboxIndex));
+  lightboxIndex=available[(position+dir+available.length)%available.length];
+  updateLightbox();
+}
 $('#lightbox-close').addEventListener('click',closeLightbox);
 $('#lightbox-back').addEventListener('click',()=>stepLightbox(-1));
 $('#lightbox-forward').addEventListener('click',()=>stepLightbox(1));

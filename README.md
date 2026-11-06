@@ -39,3 +39,10 @@ No fabricated physical address, customer reviews, license numbers, warranties, o
 3. Connect a real form submission service if visitors must submit directly without their own email client.
 4. Check geocoding provider terms/limits for production traffic; switch to Google Places API or similar if address lookup volume or coverage requires it.
 5. Add the business's approved privacy policy and any legally required notices, then test on mobile and desktop.
+
+## Draft deployment notes (2026-11-06)
+- Navigation: six service cards now link to the six corresponding portfolio category filters.
+- Gallery: earlier Google Sites image URLs did not reliably hotlink on GitHub Pages. They are not used by the deployed gallery. Six clearly labeled photo slots lead to the original source website until actual, reviewed photos are supplied. **Do not represent these as published project photographs.** To add a verified photo, place it under `assets/projects` and set the `image` field in `galleryItems` in `script.js` to its local path.
+- Assets: `assets/brand-logo.webp` (optimized from the supplied logo), `assets/dark-brick-wall.webp` (local background). Both must be committed to GitHub.
+- Contact: static mailto workflow, not a backend submission. The address matching flow uses the external Nominatim service and is not a guarantee of delivery or authoritative address verification.
+- Publish: repository must be public for free GitHub Pages and Pages Source must be `main` / root.
