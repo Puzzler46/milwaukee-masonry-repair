@@ -58,3 +58,11 @@ No fabricated physical address, customer reviews, license numbers, warranties, o
 - No external image service, animation library, video, network request, or scroll listener that blocks the browser's scrolling is needed. Scroll updates are coordinated with `requestAnimationFrame`.
 - The overlay is `aria-hidden` and `pointer-events:none`, so it cannot capture form interactions. On small screens, the visual fades while an inquiry-form field has focus.
 - If visitors prefer reduced motion, the completed illustration is displayed without animated transitions. The existing DRAFT watermark, service-filter links, gallery, and contact workflow remain intact.
+
+
+## Scroll-building mason animation (2026-11-06)
+
+- `mason-animation.js` generates a lightweight cartoon mason and 67 SVG bricks. As a visitor scrolls down the page, the wall builds course by course. At the bottom, the mason turns to face the visitor and gives a thumbs-up. Scrolling back up reverses the progress.
+- `mason-animation.css` sets the scene's fixed right-side placement, the brand colors, brick transitions and responsive mobile sizing. All animation runs locally in the browser with no external asset requests or JavaScript dependencies.
+- When the visitor has `prefers-reduced-motion: reduce` enabled, the complete wall and thumbs-up render immediately. The mascot is decorative (`aria-hidden`) and does not intercept mouse/touch interactions.
+- The original brick-wall background, ten GitHub-hosted project photos, six service-to-gallery links, static contact email form and visible DRAFT watermark remain in place.
