@@ -5,90 +5,90 @@
   "photos": [
     {
       "id": "project-01",
-      "title": "Original project photo 01",
+      "title": "Brick chimney and concrete cap",
       "image": "assets/projects/project-01.webp",
-      "category": "uncategorized",
+      "category": "chimney",
       "source": "https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72toY56cuazsyBXicAbQEl-EcSGVyTooKHWJfdgs7OnCY9tHG9w_8lM3KNo7HrYm6CbP0k8z7Tcis_950O8USWz1446yaRKaCnIlzWu_Qxr2HhIwz4S4Mf6n07Jk42dx-hDRFqoBQ-5S4vpR9s78M_eHcDhEtNbOJtqZ518c4azIYwSvYkqf_UXrcKXD_13K-K6idkVmVhRNCaWl3YUWJhUFvVnk54fBax56qAlBmpg",
       "width": 1150,
       "height": 1800
     },
     {
       "id": "project-02",
-      "title": "Original project photo 02",
+      "title": "Brick wall and mortar joints",
       "image": "assets/projects/project-02.webp",
-      "category": "uncategorized",
+      "category": "tuckpointing",
       "source": "https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72sRf0krd65bZ2w5RYWgF8zJJQ8yDh7kO4vxL8n_ME9qNFbQ4eK5h1xeqqDU_wLyD-QjeuSUAFGOuompK-J2dCz8dUKXt1yzwPBBDz4LwCNUo0Zp-0ByiWXI-p2UUgXtoWhWa6nV4nTg5gFuxT6zOnb05JAPnHiZ2JjiQjC7CfcapbMuZxyAKZxoHnbk7Uc",
       "width": 1350,
       "height": 1800
     },
     {
       "id": "project-03",
-      "title": "Original project photo 03",
+      "title": "Masonry support and stone cap detail",
       "image": "assets/projects/project-03.webp",
-      "category": "uncategorized",
+      "category": "stone",
       "source": "https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72vRLKuN532QW1Z2NL6mXgJYmV1K3l38sGEGsFujIksBI0T9PRp4d4rr88Od6sTc_E01RlgVWcizLIG09RGAYbSZT4g0roES1qDHrIn7MRkTyYNNJHX_4saZVcTRnVNpUISB3fH6hBFA7WQG3Pt1rsOnkI-GAHpE_AAf18qp1MT5D5zmPMXUZfzHZk7TMply6ctYkHDQv3vfKjvNNSpQAzX76j1-Ro57GzECQ5KLBtA",
       "width": 1536,
       "height": 1155
     },
     {
       "id": "project-04",
-      "title": "Original project photo 04",
+      "title": "Brick masonry wall",
       "image": "assets/projects/project-04.webp",
-      "category": "uncategorized",
+      "category": "brick",
       "source": "https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72vr6csYjSqaPlyaLXEgeO8kJfRSqIk4-Gy3BhLFKZHXhx4LI5wx3kugVb1_eujr-aNeWRDG-lqEGlHlkHC99--qjkdAp7dDpnkf6H-2oXGsrpdJ6iHyidyxbUd4XCo6m-E3capmgqehyBCoeZti9-oiIiNVbzOPxo991zyM3HFRlJrWlrX742a5OluupZVcTMFo8raxLie2gWBuNqedk9-mhOkxJ433wwxgYrMA",
       "width": 1536,
       "height": 1536
     },
     {
       "id": "project-05",
-      "title": "Original project photo 05",
+      "title": "Brick paver entry and steps",
       "image": "assets/projects/project-05.webp",
-      "category": "uncategorized",
+      "category": "pavers",
       "source": "https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72shN_hMz_t2XPjBKc_BASZKQuXqnwrqhua5RGfDdsJvNwz66Ty4pOhE_sLgTtnVlSXtPouM9iW6z979a63I8cjpD-4zda-2CSiGOoHFL1NPRhHolvz4K_xE5HNVt6x3620X75XJdjP-TayRb7JRg7KShvnmBHy1S6FZ-fC99sAOtBt8FZ1WP7R_w46Ux2jCaJflgRkrouJnnC9P2k_zj4iKQveo1EbgpmX95WlKGQI",
       "width": 1536,
       "height": 1536
     },
     {
       "id": "project-06",
-      "title": "Original project photo 06",
+      "title": "Concrete walkway and edging",
       "image": "assets/projects/project-06.webp",
-      "category": "uncategorized",
+      "category": "pavers",
       "source": "https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72tZiF0dXXN48JnaHXhout1LGcWcQoURJQIMx6VbPl60QwOHlLhTt_sZWjbG3wDi96qrBpnFdnXvaT8nT5jlWrMTJCCZdq-MeomuaGlb4ClbhVagP3QdZMBOJHEaMJmx1G9j9pp3ZbCaxE6HQmQpgufkqfKIXbWai2okerOrNWvQ2iVW64SQ9AoIpyu5TyITVEY8G0nqIULdlzeNfI6-jzQ8s_1HWrPdFA5IOCXt",
       "width": 640,
       "height": 640
     },
     {
       "id": "project-07",
-      "title": "Original project photo 07",
+      "title": "Brick foundation wall",
       "image": "assets/projects/project-07.webp",
-      "category": "uncategorized",
+      "category": "brick",
       "source": "https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72v8zRZ-d3ORXGmnPxwhTyVGcZwyGzZmzcFugo2PFPiWPZU2oiE7CSzpTk-U67Y7YmzAJMSPoVBOBRdl5GZxVZMNOZZhS1Xj0jZ7UI0EBuc55ZK9UbwKuQ1yaYyBFHvj51w_q1cts10dJZT9o5bJsOxOZ4McGzTiEWDsHH-sHHXLXofNLkpxBGDzqI1NbT2PPMQ0tby6NS1kyTYbQq2M3fCoWxs2lsSka95yKXNMqNc",
       "width": 640,
       "height": 640
     },
     {
       "id": "project-08",
-      "title": "Original project photo 08",
+      "title": "Stone veneer wall",
       "image": "assets/projects/project-08.webp",
-      "category": "uncategorized",
+      "category": "stone",
       "source": "https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72shitQp6DmkYWufIYp9lHG0CtmryT2iO_A79XrFyutTLB8LIEMASe2J82FYg49hfIJEeiD32KK0mc8lm3OGaTI7RDlyeqH4KUmyho2eiV2sSGfRbcsFy_uuhwTlJzUzK4_A1viUJdR8Uk1iUJykwOn2q89ZbfMEBuR6MJilxJCwDPLhXoCzw-UcibBmXms",
       "width": 1600,
       "height": 1600
     },
     {
       "id": "project-09",
-      "title": "Original project photo 09",
+      "title": "Brickwork and mortar joint detail",
       "image": "assets/projects/project-09.webp",
-      "category": "uncategorized",
+      "category": "tuckpointing",
       "source": "https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72t-PVmrx0sSytvU7oKUxSN9ExscazsNACA0NY_L-ZK5DX704B977PUnCzkH8M7vQKaXYf9c10h0TtqfeCv6XRLMa66ATiX1pivnve-xnodsxjkSmUPu4YezieggQifbB0mOZgi9HbfmY7JmjAEa_4Ml5xvgVFrDLkuJ_xFBMfhN9fauKONzZ4Bhk1uJ6KmGiEIGGgRxSXVlXNn5DE_4s1MGAQFD8DoB0NsFTKofLps",
       "width": 1600,
       "height": 1600
     },
     {
       "id": "project-10",
-      "title": "Original project photo 10",
+      "title": "Brick chimney with roof flashing",
       "image": "assets/projects/project-10.webp",
-      "category": "uncategorized",
+      "category": "chimney",
       "source": "https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72typN-BGNMIdxdgPknokLnHFXsKylADTlcXc4M4UZhmwgQL-6xN0RzTLx7KAZnXuLMYGdv-3KaTjZzLaflj2ZulD55SBd2WHeOOAvtFLy6R8xGEKl6tf4ntOBUxR6nIJNfCYt1CI8haaJPkFs25em13IYstoFYCpIT7hGRB6cwLmUBpHzMR-SM0KODyUIgeV9KrzkSPjEAtkdHUod-nKsiqQ_AXjlRPJbEJF99HRS4",
       "width": 786,
       "height": 1800
