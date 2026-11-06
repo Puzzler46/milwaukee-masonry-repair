@@ -1,0 +1,90 @@
+/* Scroll-driven masonry character: decorative, local SVG art; no dependencies. */
+.masonry-story{
+  position:fixed;
+  right:clamp(1px,1.5vw,26px);
+  bottom:6px;
+  width:clamp(280px,34vw,485px);
+  max-width:calc(100vw - 6px);
+  aspect-ratio:640/380;
+  z-index:4;
+  pointer-events:none;
+  user-select:none;
+  opacity:0;
+  transform:translate3d(0,22px,0);
+  transition:opacity .32s ease,transform .32s ease;
+  filter:drop-shadow(0 9px 15px rgba(0,0,0,.53));
+  contain:layout style;
+}
+.masonry-story.is-visible{opacity:.96;transform:translate3d(0,0,0)}
+.masonry-story__art{display:block;width:100%;height:100%;overflow:visible}
+.masonry-story__brick{
+  opacity:0;
+  transform:translateY(-10px);
+  transition:opacity .13s ease-out,transform .13s ease-out;
+}
+.masonry-story__brick.is-placed{opacity:1;transform:translateY(0)}
+.masonry-story__worker{
+  transform-box:fill-box;
+  transform-origin:center;
+  transition:opacity .32s ease-in-out,transform .32s ease-in-out;
+}
+.masonry-story__worker--back{opacity:1;transform:scaleX(1)}
+.masonry-story__worker--front{opacity:0;transform:scaleX(.06)}
+.masonry-story.is-complete .masonry-story__worker--back{opacity:0;transform:scaleX(.06)}
+.masonry-story.is-complete .masonry-story__worker--front{opacity:1;transform:scaleX(1)}
+.masonry-story__laying-arm{
+  transform-box:fill-box;
+  transform-origin:80% 12%;
+}
+.masonry-story.is-working:not(.is-complete) .masonry-story__laying-arm{
+  animation:masonry-lay .32s ease-in-out infinite alternate;
+}
+.masonry-story__thumb{
+  transform-box:fill-box;
+  transform-origin:15% 80%;
+}
+.masonry-story.is-complete .masonry-story__thumb{
+  animation:masonry-thumb .6s .25s ease-out 1 both;
+}
+.masonry-story__label{
+  position:absolute;
+  bottom:17%;
+  left:5%;
+  padding:9px 12px;
+  border:1px solid #91e791;
+  border-radius:3px;
+  background:rgba(5,21,11,.95);
+  box-shadow:0 7px 15px #0009;
+  opacity:0;
+  transform:translateY(8px) rotate(-3deg);
+  transition:opacity .26s .12s,transform .26s .12s;
+}
+.masonry-story__label strong,.masonry-story__label span{display:block}
+.masonry-story__label strong{color:#93fa78;font:900 clamp(16px,1.8vw,24px)/1 'Barlow Condensed',Impact,sans-serif;letter-spacing:1.3px}
+.masonry-story__label span{color:#eff9e9;font:800 clamp(6px,.68vw,9px)/1.5 'DM Sans',Arial,sans-serif;letter-spacing:1.4px}
+.masonry-story.is-complete .masonry-story__label{opacity:1;transform:translateY(0) rotate(-3deg)}
+@keyframes masonry-lay{from{transform:rotate(-7deg)}to{transform:rotate(8deg)}}
+@keyframes masonry-thumb{from{transform:translateY(16px) rotate(-13deg)}to{transform:translateY(0) rotate(0)}}
+@media(max-width:800px){
+  .masonry-story{width:clamp(220px,48vw,380px);right:-4px;bottom:0}
+  .masonry-story.is-visible{opacity:.84}
+  .masonry-story.is-complete{opacity:1}
+}
+@media(max-width:560px){
+  .masonry-story{width:clamp(188px,61vw,275px);right:-27px;bottom:2px;filter:drop-shadow(0 3px 7px #0009)}
+  .masonry-story.is-visible:not(.is-complete){opacity:.65}
+  .masonry-story.is-complete{opacity:.96}
+  .masonry-story__label{padding:6px 7px;left:7%;bottom:18%}
+  .masonry-story__label strong{font-size:16px}
+  .masonry-story__label span{font-size:6px;letter-spacing:.5px}
+}
+/* Keep keyboard and form fields unobstructed on small screens. */
+@media(max-width:560px){
+  body:has(#inquiry-form :focus) .masonry-story{opacity:.08}
+}
+@media(prefers-reduced-motion:reduce){
+  .masonry-story,.masonry-story__brick,.masonry-story__worker,.masonry-story__thumb,.masonry-story__label{
+    animation:none!important;
+    transition:none!important;
+  }
+}
