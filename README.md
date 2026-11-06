@@ -50,19 +50,6 @@ No fabricated physical address, customer reviews, license numbers, warranties, o
 - The scrolling DRAFT watermark is deliberately retained for the customer review copy.
 - Contact form prepares a mailto request; it does not send directly. Address matching uses OpenStreetMap geocoding and is not a postal delivery guarantee.
 
-## Scroll-controlled cartoon mason (2026-11-06)
+## Removed scroll-animation experiment (2026-11-06)
 
-- `mason-story.js` creates a self-contained, decorative SVG illustration of a masonry worker and a brick wall. `mason-story.css` provides the visual treatment and mobile rules.
-- The worker starts building as a visitor scrolls. Brick courses are placed sequentially from bottom to top based on the page-scroll percentage. Scrolling back up progressively removes bricks.
-- When the visitor reaches the bottom of the page, the worker changes to a smiling front-facing pose, raises a thumbs-up, and displays **JOB WELL DONE!**
-- No external image service, animation library, video, network request, or scroll listener that blocks the browser's scrolling is needed. Scroll updates are coordinated with `requestAnimationFrame`.
-- The overlay is `aria-hidden` and `pointer-events:none`, so it cannot capture form interactions. On small screens, the visual fades while an inquiry-form field has focus.
-- If visitors prefer reduced motion, the completed illustration is displayed without animated transitions. The existing DRAFT watermark, service-filter links, gallery, and contact workflow remain intact.
-
-
-## Scroll-building mason animation (2026-11-06)
-
-- `mason-animation.js` generates a lightweight cartoon mason and 67 SVG bricks. As a visitor scrolls down the page, the wall builds course by course. At the bottom, the mason turns to face the visitor and gives a thumbs-up. Scrolling back up reverses the progress.
-- `mason-animation.css` sets the scene's fixed right-side placement, the brand colors, brick transitions and responsive mobile sizing. All animation runs locally in the browser with no external asset requests or JavaScript dependencies.
-- When the visitor has `prefers-reduced-motion: reduce` enabled, the complete wall and thumbs-up render immediately. The mascot is decorative (`aria-hidden`) and does not intercept mouse/touch interactions.
-- The original brick-wall background, ten GitHub-hosted project photos, six service-to-gallery links, static contact email form and visible DRAFT watermark remain in place.
+The experimental scroll-driven masonry characters were removed at the customer's request. The brick-wall background, photo gallery, service links, contact form, and DRAFT watermark remain unchanged.
