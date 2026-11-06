@@ -1,0 +1,39 @@
+name: Review imported project photos
+on:
+  push:
+    paths:
+      - '.github/workflows/review-project-photos.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  contact-sheet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --disable-pip-version-check Pillow
+      - name: Render contact sheet for review
+        shell: bash
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageOps, ImageDraw
+          from pathlib import Path
+          import io, base64
+          paths=sorted(Path('assets/projects').glob('project-*.webp'))
+          W,H,COLS=1050,580,5
+          sheet=Image.new('RGB',(W,H),'#20252b')
+          draw=ImageDraw.Draw(sheet)
+          for i,p in enumerate(paths):
+              im=Image.open(p).convert('RGB')
+              tile=ImageOps.fit(im,(196,247),method=Image.Resampling.LANCZOS)
+              x,y=(i%COLS)*210+7,(i//COLS)*290+7
+              sheet.paste(tile,(x,y))
+              draw.text((x+6,y+251),p.stem,fill='white')
+          out=io.BytesIO()
+          sheet.save(out,format='JPEG',quality=65,optimize=True)
+          encoded=base64.b64encode(out.getvalue()).decode()
+          print('CONTACT_SHEET_BEGIN')
+          for i in range(0,len(encoded),2000):print('B64:'+encoded[i:i+2000])
+          print('CONTACT_SHEET_END')
+          print('COUNT:',len(paths),'JPEG_BYTES:',len(out.getvalue()))
+          PY
