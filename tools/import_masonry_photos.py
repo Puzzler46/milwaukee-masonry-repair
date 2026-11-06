@@ -9,6 +9,7 @@ from __future__ import annotations
 import datetime as dt
 import html
 import io
+import hashlib
 import json
 import re
 import sys
@@ -83,12 +84,14 @@ def run() -> int:
     # Preserve manually reviewed captions and service categories on future imports.
     existing_manifest=OUT/'manifest.json'
     previous={}
+    previous_by_id={}
     existing_caption=None
     if existing_manifest.exists():
         try:
             current=json.loads(existing_manifest.read_text())
             existing_caption=current.get('caption')
             previous={item['source']:item for item in current.get('photos',[]) if 'source' in item}
+            previous_by_id={item['id']:item for item in current.get('photos',[]) if 'id' in item}
         except (json.JSONDecodeError, OSError, KeyError) as exc:
             print('WARNING: existing manifest could not be reused:',exc,file=sys.stderr)
     photos=[]
@@ -98,8 +101,15 @@ def run() -> int:
             if image.mode!='RGB':image=image.convert('RGB')
             image.thumbnail((1800,1800),Image.Resampling.LANCZOS)
             filename=f'project-{pos:02d}.webp'
-            image.save(OUT / filename,'WEBP',quality=86,method=6)
+            photo_path=OUT/filename
+            old_hash=hashlib.sha256(photo_path.read_bytes()).digest() if photo_path.exists() else None
+            image.save(photo_path,'WEBP',quality=86,method=6)
+            same_photo=old_hash is not None and old_hash==hashlib.sha256(photo_path.read_bytes()).digest()
+            # Google Sites regenerates URL tokens, so match by identical stored photo
+            # bytes when a new URL is associated with the same numbered project.
             prior=previous.get(url,{})
+            if not prior and same_photo:
+                prior=previous_by_id.get(f'project-{pos:02d}',{})
             photos.append({'id':f'project-{pos:02d}',
                            'title':prior.get('title',f'Original project photo {pos:02d}'),
                            'image':f'assets/projects/{filename}',
